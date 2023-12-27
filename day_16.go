@@ -18,14 +18,14 @@ var moveDirection = map[Coordinate]map[string]Coordinate{
 
 func solve_day_16_1(url string) int {
 	lines := readLinesFromFile(url)
-	matrix := getContraption(&lines)
+	matrix := getMatrix(&lines)
 
 	return getEnergized(matrix, Beam{coord{x: 0, y: 0}, East})
 }
 
 func solve_day_16_2(url string) int {
 	lines := readLinesFromFile(url)
-	matrix := getContraption(&lines)
+	matrix := getMatrix(&lines)
 
 	return getMaxEnergized(matrix)
 }
@@ -108,7 +108,7 @@ func runBeam(beam Beam, energized map[coord]map[Coordinate]bool, matrix *[][]str
 	runBeam(beam, energized, matrix)
 }
 
-func getContraption(lines *[]string) *[][]string {
+func getMatrix(lines *[]string) *[][]string {
 	maxY := len(*lines)
 	matrix := make([][]string, maxY)
 

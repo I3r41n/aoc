@@ -8,7 +8,7 @@ import (
 
 func solve_21_1(url string, steps int) int {
 	lines := readLinesFromFile(url)
-	matrix := getContraption(&lines)
+	matrix := getMatrix(&lines)
 
 	return len((*stepsIn(matrix, steps))[steps])
 }
@@ -26,7 +26,7 @@ func getS(matrix *[][]string) coord {
 
 func solve_21_2(url string, steps int) int {
 	lines := readLinesFromFile(url)
-	matrix := getContraption(&lines)
+	matrix := getMatrix(&lines)
 
 	gridSize := len(*matrix)
 	period := steps % gridSize

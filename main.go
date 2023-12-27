@@ -24,6 +24,9 @@ type coordZ struct {
 	x, y, z int
 }
 
+func (c coordZ) add(o coordZ) coordZ {
+	return coordZ{c.x + o.x, c.y + o.y, c.z + o.z}
+}
 func (c coord) add(d Coordinate) coord {
 	return coord{c.x + d.x, c.y + d.y}
 }
@@ -39,6 +42,13 @@ func (c coord) manhattan(d coord) int {
 
 func (c coord) isValid(maxX int, maxY int) bool {
 	return c.x >= 0 && c.x < maxX && c.y >= 0 && c.y < maxY
+}
+
+func (c coord) toItem(priority int) *Item[coord] {
+	return &Item[coord]{
+		node:     &c,
+		priority: priority,
+	}
 }
 
 type Node[T any] struct {
@@ -98,8 +108,6 @@ func (pq *PriorityQueue[T]) update(item *Item[T], node *T, priority int) {
 	heap.Fix(pq, item.index)
 }
 
-func main() {}
-
 func readFile(url string) string {
 	b, err := os.ReadFile(url)
 	if err != nil {
@@ -132,7 +140,7 @@ func Range(start, max, step int) []int {
 }
 
 func convertStringToInt(str string) int {
-	id, _ := strconv.Atoi(str)
+	id, _ := strconv.Atoi(strings.TrimSpace(str))
 
 	return id
 }
